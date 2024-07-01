@@ -1,7 +1,7 @@
 name: Azure AZD Deployment
 
 env:
-  AZURE_ENV_NAME = 'dev'
+  environment = dev
 
 on:
   push:
@@ -31,5 +31,5 @@ jobs:
       - name: Deploy to Azure
         run: |
           azd init -t puicchan/thecatsaidno
-          azd up --environment ${{ env.AZURE_ENV_NAME }}
+          azd up --environment $environment
 

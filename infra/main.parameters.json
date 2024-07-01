@@ -3,7 +3,7 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "environmentName": {
-      "value": "${{ env.AZURE_ENV_NAME }}"
+      "value": "${{ env.environment }}"
     },
     "location": {
       "value": "eastus"
