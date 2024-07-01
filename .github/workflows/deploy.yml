@@ -42,7 +42,7 @@ jobs:
       #     azd up --environment $environment
 
       - name: Provision Infrastructure
-        run: azd provision --no-prompt
+        run: azd provision --no-prompt --environment $environment
 
       - name: Deploy Application
         run: azd deploy --no-prompt
