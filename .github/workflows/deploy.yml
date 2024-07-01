@@ -36,8 +36,13 @@ jobs:
         with:
           version: latest
    
-      - name: Deploy to Azure
-        run: |
-          azd init -t puicchan/thecatsaidno
-          azd up --environment $environment
+      # - name: Deploy to Azure
+      #   run: |
+      #     azd init -t puicchan/thecatsaidno
+      #     azd up --environment $environment
 
+      - name: Provision Infrastructure
+        run: azd provision --no-prompt
+
+      - name: Deploy Application
+        run: azd deploy --no-prompt
