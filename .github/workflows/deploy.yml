@@ -2,6 +2,7 @@ name: Azure AZD Deployment
 
 env:
   environment: dev
+  AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
 
 on:
   push:
@@ -40,6 +41,19 @@ jobs:
       #   run: |
       #     azd init -t puicchan/thecatsaidno
       #     azd up --environment $environment
+
+      - name: Log in with Azure (Client Credentials)
+        if: ${{ env.AZURE_CREDENTIALS != '' }}
+        run: |
+          $info = $env.AZURE_CREDENTIALS | ConvertFrom-Json -AsHashtable;
+          Write-Host "::add-mask::$($info.clientSecret)"
+
+          azd auth login `
+            --client-id "$($info.clientId)" `
+            --client-secret "$($info.clientSecret)" `
+            --tenant-id "$($info.tenantId)"
+        shell: pwsh
+     
 
       - name: Provision Infrastructure
         run: azd provision --no-prompt --environment $environment
