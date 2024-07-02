@@ -60,7 +60,7 @@ jobs:
         run: azd provision --no-prompt
         shell: pwsh
         env:
-          AZURE_SUBSCRIPTION_ID: ${{ vars.SUBSCRIPTION_ID }}
+          AZURE_SUBSCRIPTION_ID: ${{ vars.AZURE_SUBSCRIPTION_ID }}
           AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
           AZURE_ENV_NAME: ${{ vars.AZURE_ENV_NAME }}
 
