@@ -3,6 +3,6 @@ metadata:
   template: TheCatSaidNo@0.0.1-beta
 services:
   web:
-    project: .
+    project: ./src
     language: python
     host: appservice
