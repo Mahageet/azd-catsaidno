@@ -1,9 +1,9 @@
 name: Azure AZD Deployment
 
 env:
-  environment: dev
-  subscriptionId: ${{ vars.subscriptionId }}
+  environment: ${{ vars.AZURE_ENV_NAME }}
   azureCredentials: ${{ secrets.AZURE_CREDENTIALS }}
+
 
 on:
   push:
@@ -57,7 +57,19 @@ jobs:
      
 
       - name: Provision Infrastructure
-        run: azd provision --no-prompt --environment $environment --subscription $subscriptionId
+        run: azd provision --no-prompt
+        shell: pwsh
+        env:
+          AZURE_SUBSCRIPTION_ID: ${{ vars.SUBSCRIPTION_ID }}
+          AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
+          AZURE_ENV_NAME: ${{ vars.AZURE_ENV_NAME }}
+
 
       - name: Deploy Application
         run: azd deploy --no-prompt
+        shell: pwsh
+        env:
+          AZURE_SUBSCRIPTION_ID: ${{ vars.SUBSCRIPTION_ID }}
+          AZURE_LOCATION: ${{ vars.AZURE_LOCATION }}
+          AZURE_ENV_NAME: ${{ vars.AZURE_ENV_NAME }}
+
