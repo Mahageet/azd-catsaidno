@@ -3,16 +3,16 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "environmentName": {
-      "value": "${{ env.environment }}"
+      "value": "${AZURE_ENV_NAME}"
     },
     "location": {
-      "value": "eastus"
+      "value": "${AZURE_LOCATION}"
     },
     "principalId": {
-      "value": "${AZURE_PRINCIPAL_ID}"
+      "value": "abc"
     },
     "owner":{
-      "value": "${AZURE_PROJECT_OWNER}"
+      "value": "Mahathi"
     }
   }
 }
