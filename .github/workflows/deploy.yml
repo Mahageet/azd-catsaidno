@@ -2,7 +2,8 @@ name: Azure AZD Deployment
 
 env:
   environment: dev
-  AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+  subscriptionId: ${{ vars.subscriptionId }}
+  azureCredentials: ${{ secrets.AZURE_CREDENTIALS }}
 
 on:
   push:
@@ -43,9 +44,9 @@ jobs:
       #     azd up --environment $environment
 
       - name: Log in with Azure (Client Credentials)
-        if: ${{ env.AZURE_CREDENTIALS != '' }}
+        if: ${{ env.azureCredentials != '' }}
         run: |
-          $info = $Env:AZURE_CREDENTIALS | ConvertFrom-Json -AsHashtable;
+          $info = $Env:azureCredentials | ConvertFrom-Json -AsHashtable;
           Write-Host "::add-mask::$($info.clientSecret)"
 
           azd auth login `
@@ -56,7 +57,7 @@ jobs:
      
 
       - name: Provision Infrastructure
-        run: azd provision --no-prompt --environment $environment
+        run: azd provision --no-prompt --environment $environment --subscription $subscriptionId
 
       - name: Deploy Application
         run: azd deploy --no-prompt
