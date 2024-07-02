@@ -4,5 +4,5 @@ metadata:
 services:
   web:
     project: .
-    language: py
+    language: python
     host: appservice
