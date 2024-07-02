@@ -45,7 +45,7 @@ jobs:
       - name: Log in with Azure (Client Credentials)
         if: ${{ env.AZURE_CREDENTIALS != '' }}
         run: |
-          $info = $env.AZURE_CREDENTIALS | ConvertFrom-Json -AsHashtable;
+          $info = $Env:AZURE_CREDENTIALS | ConvertFrom-Json -AsHashtable;
           Write-Host "::add-mask::$($info.clientSecret)"
 
           azd auth login `
